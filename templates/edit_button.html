@@ -1,0 +1,6 @@
+
+{% if user.is_authenticated %}
+    <a href="{% url 'home_cms_edit' fieldtype   fieldname  %}"
+       style="left: 250px;" class="btn-floating red"><i class="material-icons">mode_edit</i>
+    </a>
+{% endif %}

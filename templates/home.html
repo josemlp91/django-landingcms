@@ -1,0 +1,297 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+{% load staticfiles %}
+
+{% if form %}
+    <script>
+         $(document).ready(function(){
+        // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
+        $('#modal1').modal();
+        $('#modal1').modal('open');
+    });
+    </script>
+{% endif %}
+
+<!-- Modal Structure -->
+<div id="modal1" class="modal">
+    <form enctype="multipart/form-data" method="post" action="">
+        <div class="modal-content">
+            <h4>Editando {{ fieldname }}  <small>({{ fieldtype }})</small></h4>
+            {% csrf_token %}
+            {{ form }}
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="modal-action modal-close waves-effect waves-green btn-flat">Aceptar</button>
+        </div>
+    </form>
+</div>
+
+{% if user.is_authenticated %}
+    <a href="{% url 'logout' %}" class="waves-effect waves-light btn right">Logout</a>
+{% else %}
+    <a  href="{% url 'login' %}" style="margin-left: 5px;" class="waves-effect waves-light btn right">Login</a>
+{% endif %}
+
+
+<div id="page-wrapper">
+
+			<!-- Header -->
+				<div id="header">
+					<!-- Logo -->
+                        {% include "edit_button.html" with fieldtype='title' fieldname='texto1_logo' %}
+                        <h1><a href="index.html" id="logo">{{ pagina_home.texto1_logo.content }}</a></h1>
+                    {% include "navbar.html" %}
+				</div>
+
+
+
+			<!-- Banner -->
+				<section id="banner" {% if pagina_home.main_imagen.image %}  style="background-image: url({{pagina_home.main_imagen.image.url}})"{% endif %}>
+                    {% include "edit_button.html" with fieldtype='image' fieldname='main_imagen' %}
+
+                    <header>
+                        <div id="texto1_banner">
+
+                            {% include "edit_button.html" with fieldtype='title' fieldname='texto1_banner' %}
+                            <h2>{{ pagina_home.texto1_banner.content }} <a href="{{ pagina_home.texto1_banner.url }}"></a></h2>
+                        </div>
+
+                        <div id="boton1_enlace">
+                            {% include "edit_button.html" with fieldtype='link' fieldname='boton1_enlace' %}
+                            <a href="{{ pagina_home.boton1_enlace.url }}" class="button">{{ pagina_home.boton1_enlace.description }}</a>
+                        </div>
+                    </header>
+				</section>
+
+			<!-- Highlights -->
+				<section class="wrapper style1">
+					<div class="container">
+						<div class="row 200%">
+							<section class="4u 12u(narrower)">
+								<div class="box highlight">
+
+
+                                    {% include "edit_button.html" with fieldtype='icon' fieldname='highlights1_icon' %}
+									<i class="icon major {{  pagina_home.highlights1_icon.icon}}"></i>
+
+                                    <h3>{{ pagina_home.highlights1_titulo.content }}</h3>
+                                    {% include "edit_button.html" with fieldtype='title' fieldname='highlights1_titulo' %}
+
+									<p>{{ pagina_home.highlights1_texto.content }}</p>
+                                    {% include "edit_button.html" with fieldtype='text' fieldname='highlights1_texto' %}
+
+								</div>
+							</section>
+							<section class="4u 12u(narrower)">
+								<div class="box highlight">
+
+                                    {% include "edit_button.html" with fieldtype='icon' fieldname='highlights2_icon' %}
+									<i class="icon major {{  pagina_home.highlights2_icon.icon}}"></i>
+
+                                    <h3>{{ pagina_home.highlights2_titulo.content }}</h3>
+                                    {% include "edit_button.html" with fieldtype='title' fieldname='highlights2_titulo' %}
+
+									<p>{{ pagina_home.highlights2_texto.content }}</p>
+                                    {% include "edit_button.html" with fieldtype='text' fieldname='highlights2_texto' %}
+
+								</div>
+							</section>
+							<section class="4u 12u(narrower)">
+								<div class="box highlight">
+
+                                     {% include "edit_button.html" with fieldtype='icon' fieldname='highlights3_icon' %}
+									<i class="icon major {{  pagina_home.highlights3_icon.icon}}"></i>
+
+                                    <h3>{{ pagina_home.highlights3_titulo.content }}</h3>
+                                    {% include "edit_button.html" with fieldtype='title' fieldname='highlights3_titulo' %}
+
+									<p>{{ pagina_home.highlights3_texto.content }}</p>
+                                    {% include "edit_button.html" with fieldtype='text' fieldname='highlights3_texto' %}
+
+								</div>
+							</section>
+						</div>
+					</div>
+				</section>
+
+			<!-- Gigantic Heading -->
+				<section class="wrapper style2">
+					<div class="container">
+						<header class="major">
+
+                             {% include "edit_button.html" with fieldtype='title' fieldname='giganticheading_titulo_grande' %}
+							<h2>{{ pagina_home.giganticheading_titulo_grande.content }}</h2>
+                            <br>
+                            {% include "edit_button.html" with fieldtype='title' fieldname='giganticheading_titulo_pequeno' %}
+							<p>{{ pagina_home.giganticheading_titulo_pequeno.content }}</p>
+						</header>
+					</div>
+				</section>
+
+			<!-- Posts -->
+				<section class="wrapper style1">
+					<div class="container">
+						<div class="row">
+							<section class="6u 12u(narrower)">
+								<div class="box post">
+
+                                    {% include "edit_button.html" with fieldtype='image' fieldname='posts1_imagen' %}
+									<a href="#" class="image left">
+                                        {% if pagina_home.posts1_imagen.image %}
+                                            <img src="{{pagina_home.posts1_imagen.image.url}}" alt="{{pagina_home.posts1_imagen.image.alt}}" />
+                                        {% endif %}
+                                    </a>
+
+									<div class="inner">
+
+										<h3>{{ pagina_home.posts1_titulo.content }}</h3>
+                                        {% include "edit_button.html" with fieldtype='title' fieldname='posts1_titulo' %}
+
+										<p>{{ pagina_home.posts1_texto.content }}</p>
+                                        {% include "edit_button.html" with fieldtype='text' fieldname='posts1_texto' %}
+									</div>
+								</div>
+							</section>
+							<section class="6u 12u(narrower)">
+								<div class="box post">
+                                    {% include "edit_button.html" with fieldtype='image' fieldname='posts2_imagen' %}
+									<a href="#" class="image left">
+                                        {% if pagina_home.posts2_imagen.image %}
+                                            <img src="{{pagina_home.posts2_imagen.image.url}}" alt="{{pagina_home.posts2_imagen.image.alt}}" />
+                                        {% endif %}
+                                    </a>
+
+									<div class="inner">
+
+										<h3>{{ pagina_home.posts2_titulo.content }}</h3>
+                                         {% include "edit_button.html" with fieldtype='title' fieldname='posts2_titulo' %}
+
+										<p>{{ pagina_home.posts2_texto.content }}</p>
+                                        {% include "edit_button.html" with fieldtype='text' fieldname='posts2_texto' %}
+									</div>
+								</div>
+							</section>
+						</div>
+						<div class="row">
+							<section class="6u 12u(narrower)">
+								<div class="box post">
+                                    {% include "edit_button.html" with fieldtype='image' fieldname='posts3_imagen' %}
+									<a href="#" class="image left">
+                                        {% if pagina_home.posts3_imagen.image %}
+                                            <img src="{{pagina_home.posts3_imagen.image.url}}" alt="{{pagina_home.posts3_imagen.image.alt}}" />
+                                        {% endif %}
+                                    </a>
+
+									<div class="inner">
+
+										<h3>{{ pagina_home.posts3_titulo.content }}</h3>
+                                        {% include "edit_button.html" with fieldtype='title' fieldname='posts3_titulo' %}
+
+										<p>{{ pagina_home.posts3_texto.content }}</p>
+                                        {% include "edit_button.html" with fieldtype='text' fieldname='posts3_texto' %}
+									</div>
+								</div>
+							</section>
+							<section class="6u 12u(narrower)">
+								<div class="box post">
+                                    {% include "edit_button.html" with fieldtype='image' fieldname='posts4_imagen' %}
+									<a href="#" class="image left">
+                                        {% if pagina_home.posts4_imagen.image %}
+                                            <img src="{{pagina_home.posts4_imagen.image.url}}" alt="{{pagina_home.posts4_imagen.image.alt}}" />
+                                        {% endif %}
+                                    </a>
+
+									<div class="inner">
+
+										<h3>{{ pagina_home.posts4_titulo.content }}</h3>
+                                        {% include "edit_button.html" with fieldtype='title' fieldname='posts4_titulo' %}
+
+										<p>{{ pagina_home.posts4_texto.content }}</p>
+                                        {% include "edit_button.html" with fieldtype='text' fieldname='posts4_texto' %}
+									</div>
+								</div>
+							</section>
+						</div>
+					</div>
+				</section>
+
+			<!-- CTA -->
+				<section id="cta" class="wrapper style3">
+					<div class="container">
+						<header>
+                            {% include "edit_button.html" with fieldtype='title' fieldname='CTA_titulo' %}
+							<h2>{{ pagina_home.CTA_titulo.content }}</h2>
+
+							<a href="{{ pagina.home.CTA_enlace.url }}" class="button">{{ pagina_home.CTA_enlace.description }}</a>
+                            {% include "edit_button.html" with fieldtype='link' fieldname='CTA_enlace' %}
+						</header>
+					</div>
+				</section>
+
+			<!-- Footer -->
+				<div id="footer">
+					<div class="container">
+						<div class="row">
+							<section class="3u 6u(narrower) 12u$(mobilep)">
+								<h3>Links</h3>
+								<ul class="links">
+									<li><a href="#">Mattis et quis rutrum</a></li>
+								</ul>
+							</section>
+							<section class="3u 6u$(narrower) 12u$(mobilep)">
+								<h3>More Links</h3>
+								<ul class="links">
+									<li><a href="#">Duis neque nisi dapibus</a></li>
+								</ul>
+							</section>
+							<section class="6u 12u(narrower)">
+								<h3>Get In Touch</h3>
+								<form>
+									<div class="row 50%">
+										<div class="6u 12u(mobilep)">
+											<input type="text" name="name" id="name" placeholder="Name" />
+										</div>
+										<div class="6u 12u(mobilep)">
+											<input type="email" name="email" id="email" placeholder="Email" />
+										</div>
+									</div>
+									<div class="row 50%">
+										<div class="12u">
+											<textarea style="height: 6rem;" name="message" id="message" placeholder="Message" rows="20"></textarea>
+										</div>
+									</div>
+									<div class="row 50%">
+										<div class="12u">
+											<ul class="actions">
+												<li><input type="submit" class="button alt" value="Send Message" /></li>
+											</ul>
+										</div>
+									</div>
+								</form>
+							</section>
+						</div>
+					</div>
+
+					<!-- Icons -->
+						<ul class="icons">
+							<li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
+							<li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
+							<li><a href="#" class="icon fa-github"><span class="label">GitHub</span></a></li>
+							<li><a href="#" class="icon fa-linkedin"><span class="label">LinkedIn</span></a></li>
+							<li><a href="#" class="icon fa-google-plus"><span class="label">Google+</span></a></li>
+						</ul>
+
+					<!-- Copyright -->
+						<div class="copyright">
+							<ul class="menu">
+								<li>&copy; Untitled. All rights reserved</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+							</ul>
+						</div>
+
+				</div>
+
+		</div>
+
+{% endblock %}
